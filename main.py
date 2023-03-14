@@ -37,9 +37,9 @@ def SJF1():
         non_zero_list = [x for x in jobs if x != 0]
         index = jobs.index(min(non_zero_list))
 
-        if min(non_zero_list) >= time:
-            process_time += time
-            jobs[index] -= time
+        if min(non_zero_list) >= count:
+            process_time += count
+            jobs[index] -= count
             count = 0
 
             if jobs[index] == 0:
@@ -69,9 +69,9 @@ def SJF2():
         non_zero_list = [x for x in jobs if x != 0]
         index = jobs.index(min(non_zero_list))
 
-        if min(non_zero_list) >= time:
-            process_time += time
-            jobs[index] -= time
+        if min(non_zero_list) >= count:
+            process_time += count
+            jobs[index] -= count
             count = 0
 
             if jobs[index] == 0:
@@ -101,10 +101,10 @@ def FCFS():
         if jobs[i] == 0:
             continue
 
-        if jobs[i] >= time:
-            jobs[i] -= time
+        if jobs[i] >= count:
+            jobs[i] -= count
+            process_time += count
             count = 0
-            process_time += time
 
             if jobs[i] == 0:
                 turnaround_time[i] = process_time
@@ -112,8 +112,8 @@ def FCFS():
             break
 
         process_time += jobs[i]
-        jobs[i] = 0
         count -= jobs[i]
+        jobs[i] = 0
 
         if jobs[i] == 0:
             turnaround_time[i] = process_time
@@ -122,8 +122,7 @@ def FCFS():
 
 
 if __name__ == "__main__":
-
-    jobs = [int(i) for i in input().split()]
+    jobs = [int(i) for i in input("Enter Burst Times: ").split()]
     burst_time = jobs.copy()
     time = 20
     turnaround_time = [0] * len(jobs)
